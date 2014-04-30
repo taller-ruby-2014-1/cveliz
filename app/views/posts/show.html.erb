@@ -13,6 +13,22 @@
 <%= link_to 'Back', posts_path %>
 <%= link_to 'edit', edit_post_path(@post)%>
 
+<h2>Comentarios:</h2>
+<% @post.comments.each do |comment| %>
+	<p>
+		<strong>Commenter: </strong>
+		<%= comment.commenter %>
+	</p>
+	<p>
+		<strong>Comment: </strong>
+		<%= comment.body %>
+	</p>
+	<p>
+		<%= link_to 'Destroy Comment', [comment.post, comment], method: :delete, data: {confirm: 'Estas seguro?'}%>
+	</p>	
+
+<% end %>
+
 <h2>Agregar un comentario<h2>
 <%= form_for ([@post, @post.comments.build]) do |f| %>
 	<p>
@@ -30,3 +46,4 @@
 	</p>
 
 <% end %>
+
