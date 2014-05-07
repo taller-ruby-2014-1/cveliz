@@ -48,4 +48,6 @@ class PostsController < ApplicationController
 			params.require(:post).permit(:title, :text)
 		end
 
+	before_filter :authenticate_user!
+
 end
