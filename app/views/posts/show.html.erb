@@ -1,35 +1,27 @@
-<h1>Este es el Nuevo post!</h1>
+<h1><%= @post.title %></h1>
 
-<p>
-	<strong>Title:</strong>
-	<%= @post.title %>
-</p>
 
-<p>
-	<strong>Text:</strong>
-	<%= @post.text %>
-</p>
+<h3><%= @post.text %></h3>
+	
+
 
 <%= link_to 'Back', posts_path %>
 <%= link_to 'edit', edit_post_path(@post)%>
 
-<h2>Comentarios:</h2>
+<br /><br />
+<legend>Comentarios</legend>
 <% @post.comments.each do |comment| %>
 	<p>
-		<strong>Commenter: </strong>
-		<%= comment.commenter %>
+		<strong><%= comment.commenter %>: </strong><%= comment.body %>
 	</p>
-	<p>
-		<strong>Comment: </strong>
-		<%= comment.body %>
-	</p>
+	
 	<p>
 		<%= link_to 'Destroy Comment', [comment.post, comment], method: :delete, data: {confirm: 'Estas seguro?'}%>
 	</p>	
 
 <% end %>
 
-<h2>Agregar un comentario<h2>
+<legend>Agregar un comentario</legend>
 <%= form_for ([@post, @post.comments.build]) do |f| %>
 	<p>
 		<%= f.label :commenter %> <br />
@@ -42,7 +34,7 @@
 	</p>
 
 	<p>
-		<%= f.submit %>
+		<%= f.submit :class => "btn btn-default btn-lg" %>
 	</p>
 
 <% end %>
