@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	def index
 		@posts = Post.all
+		@last = Post.last(5)
 	end
 
 	def new
@@ -10,7 +11,7 @@ class PostsController < ApplicationController
 	def create
 		#render text: params[:post].inspect
 		@post = Post.new(post_params)
-		
+		@last = Post.last(5)
 		if @post.save
 			redirect_to @post
 		else 
@@ -20,10 +21,12 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+		@last = Post.last(5)
 	end
 
 	def edit
 		@post = Post.find(params[:id])
+		@last = Post.last(5)
 	end
 
 	def update
@@ -34,6 +37,7 @@ class PostsController < ApplicationController
 		else
 			render 'edit'
 		end
+		@last = Post.last(5)
 	end
 
 	def destroy

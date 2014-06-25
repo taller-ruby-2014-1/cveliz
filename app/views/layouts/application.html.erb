@@ -54,14 +54,19 @@
             <li><%= link_to "Nuevo Post", new_post_path  %></li>
            </ul>
            <ul class="nav navbar-nav navbar-right">
-     	    <li class="dropdown navbar-right">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome</a>
-				<ul class="dropdown-menu"> Cerrar Sesion </ul>
-			</li>
+     	      <li class="dropdown navbar-right">
+				      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome <%= current_user.email %></a>
+
+			     </li>
           </ul>
         </div>
       </div>
     </div>
+
+
+
+
+            
 
     <div class="container">
       <div class="row">
@@ -71,12 +76,17 @@
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
+            <h3>Últimos Posts</h3>
+            <% if @last%>
+              <ul class="nav nav-list">
+                <% @last.each do |p| %>
+                  <li class="nav-header"><%= link_to p.title, post_path(p) %></li>
+                <% end %>
+              
+            <% else %>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+               <li class="nav-header">No hay post para mostrar...</li> 
+            <% end %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
